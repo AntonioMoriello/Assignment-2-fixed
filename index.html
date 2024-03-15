@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Information Form</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+  <form id="signup" class="form">
+    <h1>User Information Form</h1>
+    <div class="field">
+      <label for="firstname">First Name:</label>
+      <input id="firstname" name="firstname" type="text" placeholder="Enter your first name">
+      <small></small>
+    </div>
+    <div class="field">
+      <label for="lastname">Last Name:</label>
+      <input id="lastname" name="lastname" type="text" placeholder="Enter your last name">
+      <small></small>
+    </div>
+    <div class="field">
+      <label for="email">Email:</label>
+      <input id="email" name="email" type="email" placeholder="Enter your email">
+      <small></small>
+    </div>
+    <div class="field">
+      <label for="password">Password:</label>
+      <input id="password" name="password" type="password" placeholder="Enter your password">
+      <i class="bi bi-eye-slash" id="togglePassword"></i>
+      <small></small>
+    </div>
+    <div class="field">
+      <label for="retype-password">Retype Password:</label>
+      <input id="retype-password" name="retype-password" type="password" placeholder="Retype your password">
+      <small></small>
+    </div>
+    <div class="field">
+      <label for="postalcode">Canadian Postal Code:</label>
+      <input id="postalcode" name="postalcode" type="text" placeholder="Format: A1A 1A1">
+      <small></small>
+    </div>
+    <div class="field">
+      <label for="cities">Cities:</label>
+      <select id="cities" name="cities">
+        <option value="Quebec City">Quebec City</option>
+        <option value="Montreal">Montreal</option>
+        <option value="Toronto">Toronto</option>
+        <option value="Ottawa">Ottawa</option>
+        <option value="New York City">New York City</option>
+      </select>
+      <button type="button" id="modify-cities" style="display:block; margin-top: 10px;">Modify Cities</button>
+    </div>
+    <button type="submit" class="submit-btn">Submit</button>
+  </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
