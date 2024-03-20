@@ -4,13 +4,13 @@ document.addEventListener("DOMContentLoaded", function() {
     const passwordInput = form.querySelector("#password");
     const retypePasswordInput = form.querySelector("#retype-password");
     const postalCodeInput = form.querySelector("#postalcode");
-    const togglePassword = document.querySelector("#togglePassword"); // Adjust if necessary
+    const togglePassword = document.querySelector("#togglePassword");
     const modifyCitiesBtn = document.querySelector("#modify-cities");
 
     const EMAIL_REQUIRED = "Please enter your email";
     const EMAIL_INVALID = "Please enter a correct email address format";
     const PASSWORD_REQUIRED = "Please enter a password";
-    const PASSWORD_INVALID = "Password must be at least 8 characters, include one uppercase letter, one number, and one special character";
+    const PASSWORD_INVALID = "Password must be at least 6 characters, include one uppercase letter, one number, and one special character";
     const PASSWORD_MISMATCH = "Passwords do not match";
     const POSTAL_CODE_REQUIRED = "Please enter your postal code";
     const POSTAL_CODE_INVALID = "Enter a valid Canadian postal code (e.g., A1A 1A1)";
@@ -38,11 +38,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     function validateEmail(input) {
-        return hasValue(input, EMAIL_REQUIRED) && showMessage(input, '', /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(input.value.trim()), EMAIL_INVALID);
+        const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+        return hasValue(input, EMAIL_REQUIRED) && showMessage(input, '', emailRegex.test(input.value.trim()), EMAIL_INVALID);
     }
 
     function validatePassword(input) {
-        return hasValue(input, PASSWORD_REQUIRED) && showMessage(input, '', /^(?=.*\d)(?=.*[A-Z])(?=.*[!@#$%^&*()_+])[A-Za-z\d!@#$%^&*()_+]{8,}$/.test(input.value.trim()), PASSWORD_INVALID);
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+        return hasValue(input, PASSWORD_REQUIRED) && showMessage(input, '', passwordRegex.test(input.value.trim()), PASSWORD_INVALID);
     }
 
     function validatePostalCode(input) {
@@ -81,10 +83,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let passwordsMatchValid = checkPasswordsMatch(passwordInput, retypePasswordInput);
 
         if (emailValid && passwordValid && postalCodeValid && passwordsMatchValid) {
-            
             const dataString = `Email: ${emailInput.value}\nPassword: ${passwordInput.value}\nPostal Code: ${postalCodeInput.value}`;
-
-            
             const dataBlob = new Blob([dataString], { type: 'text/plain' });
             const url = URL.createObjectURL(dataBlob);
             const downloadLink = document.createElement('a');
